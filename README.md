@@ -1,5 +1,7 @@
 # null
 
+[![test](https://github.com/qawatake/null/actions/workflows/test.yaml/badge.svg)](https://github.com/qawatake/null/actions/workflows/test.yaml)
+
 `null` is a package for providing types to handle nullable values.
 
 For a `comparable` type `V`, it provides a type `null.T[V]` that implements methods like `sql.Scanner` and `json.Unmarshaler`. For instance, it supports types such as:
