@@ -1,0 +1,16 @@
+on:
+  push:
+  pull_request:
+name: check if go.mod, go.sum are clean
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+      - name: clean go.mod, go.sum
+        run: make mod.clean
+      - name: check diff
+        run: git diff --exit-code --color
