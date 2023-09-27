@@ -1,7 +1,7 @@
 on:
   push:
   pull_request:
-name: check if go.mod, go.sum are clean
+name: check-if-modfiles-are-clean
 jobs:
   test:
     runs-on: ubuntu-latest
