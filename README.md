@@ -1,6 +1,10 @@
 # null
 
+[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godoc]
 [![test](https://github.com/qawatake/null/actions/workflows/test.yaml/badge.svg)](https://github.com/qawatake/null/actions/workflows/test.yaml)
+[![codecov](https://codecov.io/gh/qawatake/null/graph/badge.svg)](https://codecov.io/gh/qawatake/null)
+
+[godoc]: http://godoc.org/github.com/qawatake/null
 
 `null` is a package for providing types to handle nullable values.
 
