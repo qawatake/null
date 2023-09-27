@@ -3,7 +3,7 @@ on:
   pull_request:
 name: upload-coverage-report
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
