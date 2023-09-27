@@ -4,7 +4,7 @@
 
 `null` is a package for providing types to handle nullable values.
 
-For a `comparable` type `V`, it provides a type `null.T[V]` that implements methods like `sql.Scanner` and `json.Unmarshaler`. For instance, it supports types such as:
+For a `comparable` type `V`, `null.T[V]` implements methods like `sql.Scanner` and `json.Unmarshaler`. For instance, it supports types such as:
 
 - Derived integer types like `time.Duration`
 - Structures with `comparable` fields
