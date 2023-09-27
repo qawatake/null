@@ -8,7 +8,7 @@ import (
 
 	// can replace with "database/sql" after go1.22
 	// https://github.com/golang/go/issues/60370
-	sql1_22 "github.com/qawatake/go-sandbox/null/internal/sql"
+	sql1_22 "github.com/qawatake/null/internal/sql"
 )
 
 // MEMO: This package does not provide NewXXX functions.

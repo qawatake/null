@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/qawatake/go-sandbox/null"
+	"github.com/qawatake/null"
 )
 
 func TestEqual(t *testing.T) {
