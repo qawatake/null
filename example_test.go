@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/qawatake/go-sandbox/null"
+	"github.com/qawatake/null"
 )
 
 func ExampleT() {
