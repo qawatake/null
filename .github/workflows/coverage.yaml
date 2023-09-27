@@ -1,0 +1,15 @@
+on:
+  push:
+  pull_request:
+name: upload-coverage-report
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: test and generate coverage report
+        run: make test.cover
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.txt
