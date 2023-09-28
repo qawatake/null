@@ -20,14 +20,12 @@ import (
 // This is because there is no standard way to marshal/unmarshal for any type.
 
 // T represents a value that may be null.
-//
 // The zero value for T is ready for use.
-//
 // It's not recommended to specify composite types with elements of reference types or interface types for V.
 // This is because references may be unintentionally shared.
 //
-// If V is [strictly comparable], T is also strictly comparable.
-// However, if V implements the Equal method, you should compare using the Equal method. For details, refer to [T.Equal].
+// If V is [strictly comparable], T[V] is also strictly comparable.
+// However, if V implements method `Equal(u V) bool`, you should compare values of type T[V] using [T.Equal]. For details, refer to [T.Equal].
 //
 // [strictly comparable]: https://go.dev/ref/spec#Comparison_operators
 type T[V comparable] struct {
@@ -44,7 +42,7 @@ func From[V comparable](v V) T[V] {
 	}
 }
 
-// FromPtr creates a new T that is null if p is null.
+// FromPtr creates a new T that is null if p is nil.
 func FromPtr[V comparable](p *V) T[V] {
 	if p == nil {
 		return T[V]{}
@@ -107,8 +105,13 @@ type equaler[V any] interface {
 }
 
 // Equal reports whether t and u are equal.
-// If V implements Equal(V) bool, it is used for comparison.
-// In this case, you should compare using Equal instead of ==.
+// Two values t and u are equal if and only if either of the following conditions is met:
+//   - t and u are both null.
+//   - t and u are both not null and the internal values are equal in the sense of ==.
+//   - t and u are both not null and the internal values are equal by `Equal(V) bool`.
+//
+// Even if t and u are different in terms of ==, they may be equal.
+// So code should use Equal instead of == for comparison.
 func (t T[V]) Equal(u T[V]) bool {
 	if t.IsNull() && u.IsNull() {
 		return true
@@ -119,10 +122,13 @@ func (t T[V]) Equal(u T[V]) bool {
 	if !t.IsNull() && u.IsNull() {
 		return false
 	}
+	if t == u {
+		return true
+	}
 	if e, ok := any(t.v.V).(equaler[V]); ok {
 		return e.Equal(u.v.V)
 	}
-	return t == u
+	return false
 }
 
 // ValueOrZero returns the inner value V.
@@ -135,7 +141,7 @@ func (t T[V]) ValueOrZero() V {
 	return t.v.V
 }
 
-// Ptr method returns a pointer to the internal value, but it provides a different reference with each call.
+// Ptr returns a pointer to the internal value, but it provides a different reference with each call.
 // If t is null (that is, t.IsNull() returns true), it returns nil.
 func (t T[V]) Ptr() *V {
 	if t.IsNull() {

@@ -141,3 +141,12 @@ func ExampleT_Equal() {
 	// x1.Equal(x2): true
 	// x1.Equal(x3): false
 }
+
+func ExampleT_Ptr() {
+	i := null.From[int](123)
+	p1 := i.Ptr()
+	p2 := i.Ptr()
+	fmt.Printf("p1 != p2: %v\n", p1 != p2)
+	// Output:
+	// p1 != p2: true
+}
