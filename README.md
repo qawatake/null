@@ -58,8 +58,8 @@ Differences from the well-known package [gopkg.in/guregu/null], which also defin
 
 ### Minor differences
 
-- `guregu/null.Int` can json-unmarshal string types like `"123"`, but `null.T[int64]` will result in an error. This aligns with the behavior when `json.Unmarshal` is applied to `int64`.
-- `guregu/null.Float` can json-unmarshal string types like `"1.23"`, but `null.T[float64]` will result in an error. This aligns with the behavior when `json.Unmarshal` is applied to `float64`.
+- `guregu/null.Int` can json-unmarshal quoted numbers like `"123"`, but `null.T[int64]` cannot. This aligns with the behavior when `json.Unmarshal` is applied to `int64`.
+- `guregu/null.Float` can json-unmarshal quoted numbers like `"1.23"`, but `null.T[float64]` cannot. This aligns with the behavior when `json.Unmarshal` is applied to `float64`.
 - For floats with extremely small or large absolute values, the output of `MarshalJSON` for `guregu/null.Float` and `null.T[float64]` is different. `null.T[float64]` matches the behavior when `float64` is passed to `json.MarshalJSON`.
 - The method `IsZero` has been renamed to `IsNull`.
 
