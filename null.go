@@ -58,7 +58,7 @@ func (t *T[V]) Scan(src interface{}) error {
 		*t = T[V]{}
 		return err
 	}
-	if t.IsNull() {
+	if !t.v.Valid {
 		*t = T[V]{}
 	}
 	return nil
@@ -113,7 +113,7 @@ type equaler[V any] interface {
 // Even if t and u are different in terms of ==, they may be equal.
 // So code should use Equal instead of == for comparison.
 func (t T[V]) Equal(u T[V]) bool {
-	if t.IsNull() && u.IsNull() {
+	if t == u {
 		return true
 	}
 	if t.IsNull() && !u.IsNull() {
@@ -121,9 +121,6 @@ func (t T[V]) Equal(u T[V]) bool {
 	}
 	if !t.IsNull() && u.IsNull() {
 		return false
-	}
-	if t == u {
-		return true
 	}
 	if e, ok := any(t.v.V).(equaler[V]); ok {
 		return e.Equal(u.v.V)
