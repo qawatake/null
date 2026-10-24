@@ -1019,7 +1019,7 @@ func requireNoError(t *testing.T, err error) {
 func assertEqual[T comparable](t *testing.T, x T, y T, opts ...cmp.Option) bool {
 	t.Helper()
 	if diff := cmp.Diff(x, y, opts...); diff != "" {
-		t.Errorf(diff)
+		t.Error(diff)
 		return false
 	}
 	return true
